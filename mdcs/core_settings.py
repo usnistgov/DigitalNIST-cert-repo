@@ -5,19 +5,19 @@ import os
 SERVER_URI = os.environ["SERVER_URI"] if "SERVER_URI" in os.environ else None
 
 # Website customization
-WEBSITE_SHORT_TITLE = "MDCS"
-CUSTOM_DATA = "Materials Data"
+WEBSITE_SHORT_TITLE = "DigiNIST"
+CUSTOM_DATA = "Digital NIST Test Site"
 CUSTOM_NAME = os.environ["SERVER_NAME"] if "SERVER_NAME" in os.environ else "Curator"
-CUSTOM_TITLE = "Materials Data Curation System"
-CUSTOM_SUBTITLE = "Part of the Materials Genome Initiative"
+CUSTOM_TITLE = "Digital NIST Test Site"
+CUSTOM_SUBTITLE = "Part of the NIST Digital Initiative"
 CURATE_MENU_NAME = "Data Curation"
 WEBSITE_ADMIN_COLOR = "yellow"
+DISPLAY_NIST_HEADERS = True
 # black, black-light, blue, blue-light, green, green-light, purple, purple-light, red, red-light, yellow, yellow-light
 
-DATA_SOURCES_EXPLORE_APPS = [
-    "core_explore_federated_search_app",
-    "core_explore_oaipmh_app",
-]
+#DATA_SOURCES_EXPLORE_APPS = [ "core_explore_federated_search_app", "core_explore_oaipmh_app", ]
+
+CAN_ANONYMOUS_ACCESS_PUBLIC_DOCUMENT = True 
 
 # Lists in data not stored if number of elements is over the limit (e.g. 100)
 SEARCHABLE_DATA_OCCURRENCES_LIMIT = None
@@ -30,7 +30,7 @@ EXPLORE_ADD_DEFAULT_LOCAL_DATA_SOURCE_TO_QUERY = True
 """ boolean: Do we add the local data source to new queries by default
 """
 
-SSL_CERTIFICATES_DIR = True
+SSL_CERTIFICATES_DIR = False
 """ Either a boolean, in which case it controls whether requests verify the server's TLS certificate, 
 or a string, in which case it must be a path to a CA bundle to use.
 """
@@ -82,36 +82,46 @@ DISPLAY_RULES_OF_BEHAVIOR_FOOTER = False
 """ boolean: display the rules of behavior link in the footer
 """
 
-ID_PROVIDER_SYSTEMS = {
-    "local": {
-        "class": "core_linked_records_app.utils.providers.local.LocalIdProvider",
-        "args": [],
-    },
-    # "handle": {
-    #     "class": "core_linked_records_app.utils.providers.handle_net.HandleNetSystem",
-    #     "args": [
-    #         "https://handle-server.example.org:8000",
-    #         "300%3APREFIX/USER",
-    #         "password",
-    #     ],
-    # },
-}
-""" dict: provider systems available for registering PIDs.
+ID_PROVIDER_SYSTEM_NAME = "local"
+""" str: internal name of the provider system.
 """
 
-ID_PROVIDER_PREFIXES = ["cdcs"]
+ID_PROVIDER_SYSTEM_CONFIG = {
+    "class": "core_linked_records_app.utils.providers.local.LocalIdProvider",
+    "args": [],
+}
+""" dict: provider system configuration for resolving PIDs.
+"""
+
+ID_PROVIDER_PREFIXES = (
+    os.environ["ID_PROVIDER_PREFIXES"].split(",")
+    if "ID_PROVIDER_PREFIXES" in os.environ
+    else ["cdcs"]
+)
 """ list<str>: accepted providers if manually specifying PIDs (first item is the
 default prefix)
 """
 
-PID_XPATH = "root.pid"
+ID_PROVIDER_PREFIX_DEFAULT = os.getenv(
+    "ID_PROVIDER_PREFIX_DEFAULT", ID_PROVIDER_PREFIXES[0]
+)
+
+ID_PROVIDER_PREFIX_BLOB = os.getenv(
+    "ID_PROVIDER_PREFIX_BLOB", ID_PROVIDER_PREFIXES[0]
+)
+
+PID_XPATH = os.getenv("PID_XPATH", "root.pid")
 """ string: location of the PID in the document, specified as dot notation
 """
 
-AUTO_SET_PID = False
+AUTO_SET_PID = os.getenv("AUTO_SET_PID", "False").lower() == "true"
 """ boolean: enable the automatic pid generation for saved data.
 """
 
 ENABLE_SAML2_SSO_AUTH = os.getenv("ENABLE_SAML2_SSO_AUTH", "False").lower() == "true"
 """ boolean: enable SAML2 SSO authentication.
+"""
+
+ENABLE_HANDLE_PID = os.getenv("ENABLE_HANDLE_PID", "False").lower() == "true"
+""" boolean: enable handle server PID support.
 """

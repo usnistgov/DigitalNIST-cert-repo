@@ -2,19 +2,21 @@
 <div class="row">
     <div class="row justify-content-center" id="intro">
         <div class="col-md-5">
+        <div class="row title-container">
+            <img id="mgi-diagram" src="/static/core_main_app/img/dss.png" alt="cell">
+        </div>
             <h2>{{ CUSTOM_TITLE }}</h2>
             <p>
-                This system allows for the curation of Material Data in a repository using
-                predefined templates.
+	         In order for digital representations to be usable and for relevant data to be retrievable by users, the data has to be formatted to be searchable. Thus, it is imperative to have agreed-upon or standardized data formats that are harmonized globally. Standardized data formats would also apply to metadata, which is the data that identifies what data is about. As an example, scale manufacturers would need to use the same data formats for specific parameters, such as common descriptions of what is being measured, consistent units of measurement, as well as other metadata related to the digital representation as described above. To this end, the International Bureau of Weights and Measures (Bureau International des Poids et Mesures, BIPM) hosted a workshop this last spring on The International System of Units (SI) in Findable, Accessible, Interoperable and Reusable (FAIR) Digital Data. Joint efforts such as these provide information on what is happening internationally towards providing a harmonized approach to formatting and reporting measurement data.
             </p>
             <p>
-                This is being developed at the National Institute of Standards and Technology and
-                is made available to solicit comments from the Material Science community. Please
-                do not enter any proprietary data into this system.
+The digitalization of legal metrology is already taking place in other countries, and the most recent issue (July 2021) of the OIML Bulletin provides a worthwhile summary of these activities. The National Metrology Institute of Germany (Physikalisch-Technische Bundesanstalt, PTB) and the National Physical Laboratory (NPL) in the UK have developed Digital Calibration Certificates (DCCs) to collect and organize standardized metadata and data concerning a calibration. PTB has developed a “European Metrology Cloud” and the Interamerican System of Metrology (SIM) has a set of task forces devoted to “Metrology for Digital Transformation” (M4DT) that are sharing information on automating laboratory processes, the use of cloud technologies for metrology, and DCCs. In fact, manufacturers that are engaged in European and/or Latin American markets may have already considered how to integrate with these digital systems.
             </p>
+            <p>
+In the U.S., NIST has begun an effort towards realizing the “Digital NIST” with an initial focus on DCCs and their potential customization for Standard Reference Material (SRM®) Certificates of Analysis and NIST calibration reports. Future efforts will include a major overhaul and modernization of data acquisition, extraction, representation, and management throughout the organization. Beyond this, NIST has an eye towards the development of the NIST Metrology Cloud, that would be used by industry, governments, academia, and regulators as a source of information and a guarantee of quality for legal metrology, international trade, data exchange, and calibration of instruments, among many other applications. The overarching goal of the cloud is to support the growth of U.S. companies in the global marketplace.
         </div>
         <div class="col-md-3">
-            <img id="mgi-diagram" src="{% static 'core_main_app/img/mgi_diagram.jpg' %}"
+            <img id="mgi-diagram" src="{% static 'core_main_app/img/SI.png' %}"
                  alt="Material Genome Initiative diagram">
         </div>
     </div>
